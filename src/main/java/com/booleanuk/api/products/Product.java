@@ -2,13 +2,10 @@ package com.booleanuk.api.products;
 
 public class Product {
     private static int nextId = 1;
-    private int id;
+    private final int id;
     private String name;
     private String category;
     private int price;
-
-    public Product() {
-    }
 
     public Product(String name, String category, int price){
         this.id = nextId;

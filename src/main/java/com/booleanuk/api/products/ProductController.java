@@ -12,7 +12,10 @@ public class ProductController {
     private ProductRepository productRepo = new ProductRepository();
 
     @GetMapping
-    public List<Product> getAllProducts(){
+    public List<Product> getProducts(@RequestParam (required = false) String category){
+        if (category != null){
+            return this.productRepo.getByCategory(category);
+        }
         return this.productRepo.getAll();
     }
 
@@ -24,7 +27,7 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Product createOneProduct(@RequestBody Product product){
-        return this.productRepo.createProduct(product.getName(), product.getCategory(), product.getPrice());
+        return this.productRepo.createProduct(product);
     }
 
     @PutMapping("/{id}")
